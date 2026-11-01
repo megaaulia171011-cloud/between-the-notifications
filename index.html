@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Between the Notifications</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#e9e5e8;color:#39343b;
+ font-family:Arial,sans-serif;display:flex;
+ justify-content:center;min-height:100vh;padding:18px 10px
+}
+.phone{
+ width:100%;max-width:410px;min-height:720px;
+ background:#fff;border-radius:30px;overflow:hidden;
+ box-shadow:0 12px 40px #66556b30;position:relative;
+ display:flex;flex-direction:column
+}
+.status{padding:15px 22px;font-size:12px;display:flex;justify-content:space-between}
+.top{padding:15px 22px 20px;background:#f5eef4}
+.small{font-size:12px;color:#928693}
+h1{font-size:25px;margin:9px 0 5px}
+.subtitle{font-size:13px;color:#887c89}
+.screen{padding:18px;flex:1;overflow:auto}
+.profile{display:flex;align-items:center;gap:13px;margin:15px 0}
+.avatar{
+ width:52px;height:52px;border-radius:18px;
+ background:linear-gradient(135deg,#cbb5d3,#f1d9df);
+ display:grid;place-items:center;font-size:23px
+}
+.card{background:#faf7fa;border-radius:18px;padding:15px;margin:12px 0}
+.appgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.app{
+ border:0;background:#f7f1f6;border-radius:18px;
+ padding:17px 5px;color:#554958;font-size:12px
+}
+.app span{display:block;font-size:25px;margin-bottom:7px}
+button{cursor:pointer}
+.nav{display:flex;justify-content:space-around;padding:12px;border-top:1px solid #eee}
+.nav button{border:0;background:none;font-size:12px;color:#887b8a}
+.chathead{display:flex;align-items:center;gap:10px;border-bottom:1px solid #eee;padding-bottom:12px}
+.chathead .avatar{width:42px;height:42px}
+.messages{display:flex;flex-direction:column;gap:10px;padding:15px 0}
+.msg{max-width:82%;padding:11px 14px;border-radius:17px;font-size:14px;line-height:1.45}
+.them{background:#f1edf2;align-self:flex-start;border-bottom-left-radius:5px}
+.me{background:#dfcfe4;align-self:flex-end;border-bottom-right-radius:5px}
+.time{font-size:10px;color:#928693;margin-top:5px;text-align:right}
+.composer{display:flex;gap:7px;padding-top:10px;border-top:1px solid #eee}
+input{min-width:0;flex:1;border:1px solid #e7dfe8;border-radius:20px;padding:12px;font-size:14px;outline:none}
+.send{border:0;border-radius:50%;width:43px;background:#a98bb2;color:white;font-size:18px}
+.back{border:0;background:none;font-size:14px;color:#8d7198;padding:0 0 14px}
+.note{background:#fff8df;padding:17px;border-radius:15px;line-height:1.6}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="phone">
+ <div class="status"><span>15:22 ◉</span><span>4G　▰ 87%</span></div>
+
+ <section id="home">
+  <div class="top">
+   <div class="small">SATURDAY · 01 NOVEMBER</div>
+   <h1>Good afternoon, Biru.</h1>
+   <div class="subtitle">A little world behind the screen ♡</div>
+  </div>
+  <div class="screen">
+   <div class="card">
+    <div class="small">RECENT NOTIFICATION</div>
+    <div class="profile">
+     <div class="avatar">🪻</div>
+     <div><b>Seo-jun</b><div class="small">Ada pesan baru untukmu.</div></div>
+    </div>
+    <button class="back" onclick="openChat()">Buka percakapan →</button>
+   </div>
+   <p class="small">YOUR APPLICATIONS</p>
+   <div class="appgrid">
+    <button class="app" onclick="openChat()"><span>💬</span>Messages</button>
+    <button class="app" onclick="showPage('instagram')"><span>📷</span>Instagram</button>
+    <button class="app" onclick="showPage('gallery')"><span>🖼️</span>Gallery</button>
+    <button class="app" onclick="showPage('notes')"><span>📝</span>Notes</button>
+    <button class="app" onclick="showPage('calls')"><span>📞</span>Calls</button>
+    <button class="app" onclick="showPage('settings')"><span>⚙️</span>Settings</button>
+   </div>
+  </div>
+ </section>
+
+ <section id="chat" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Back to home</button>
+  <div class="chathead">
+   <div class="avatar">🌙</div>
+   <div><b>Han Seo-jun</b><div class="small">online · project team</div></div>
+  </div>
+  <div id="messages" class="messages">
+   <div class="msg them">Biru, kamu sudah melihat pesan dari tim produksi tadi?</div>
+   <div class="msg them">Mereka mengubah jadwal pertemuan. Aku baru saja diberi tahu.</div>
+  </div>
+  <div class="composer">
+   <input id="reply" placeholder="Tulis pesan Biru..." onkeydown="if(event.key==='Enter')sendMessage()">
+   <button class="send" onclick="sendMessage()">➤</button>
+  </div>
+ </section>
+
+ <section id="instagram" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Home</button>
+  <h2>Instagram</h2>
+  <div class="card">📷 <b>lum.official</b><p>Behind the scenes. A little glimpse of today's work.</p><div class="small">♡ 24.8K likes · 328 comments</div></div>
+  <div class="card">🌙 <b>seojun.archive</b><p>Long day, good people, better memories.</p><div class="small">♡ 18.2K likes · 194 comments</div></div>
+  <p class="small">Fictional social feed</p>
+ </section>
+
+ <section id="gallery" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Home</button>
+  <h2>Gallery</h2>
+  <div class="card">🌆 <b>Studio, 18:42</b><p class="small">A quiet evening after rehearsal.</p></div>
+  <div class="card">☕ <b>Untitled_02</b><p class="small">Coffee and unfinished schedules.</p></div>
+  <div class="card">🎞️ <b>Behind the scenes</b><p class="small">Memories from the project.</p></div>
+ </section>
+
+ <section id="notes" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Home</button>
+  <h2>Notes</h2>
+  <textarea id="myNote" placeholder="Tulis catatan Biru di sini..." style="width:100%;height:190px;border:0;background:#fff8df;border-radius:15px;padding:15px;font:14px Arial"></textarea>
+  <button class="app" onclick="saveNote()">💾 Save note</button>
+  <p id="saved" class="small"></p>
+ </section>
+
+ <section id="calls" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Home</button>
+  <h2>Recent calls</h2>
+  <div class="card">🌙 Han Seo-jun <span class="small"> · Yesterday, 21:14</span></div>
+  <div class="card">🌷 Yuna <span class="small"> · Yesterday, 17:30</span></div>
+ </section>
+
+ <section id="settings" class="screen hidden">
+  <button class="back" onclick="showPage('home')">← Home</button>
+  <h2>Settings</h2>
+  <div class="card">BETWEEN THE NOTIFICATIONS<br><span class="small">Interactive fictional story · Version 1.0</span></div>
+  <button class="app" onclick="resetChat()">↻ Reset conversation</button>
+ </section>
+
+ <div class="nav">
+  <button onclick="showPage('home')">⌂<br>Home</button>
+  <button onclick="openChat()">▢<br>Messages</button>
+  <button onclick="showPage('gallery')">▧<br>Gallery</button>
+  <button onclick="showPage('notes')">☷<br>Notes</button>
+ </div>
+</div>
+
+<script>
+const pages=['home','chat','instagram','gallery','notes','calls','settings'];
+
+function showPage(page){
+ pages.forEach(id=>document.getElementById(id).classList.add('hidden'));
+ document.getElementById(page).classList.remove('hidden');
+}
+function openChat(){showPage('chat')}
+
+function addMessage(text,type){
+ const area=document.getElementById('messages');
+ const bubble=document.createElement('div');
+ bubble.className='msg '+type;
+ bubble.textContent=text;
+ area.appendChild(bubble);
+ area.scrollTop=area.scrollHeight;
+}
+
+function replyFor(message){
+ const m=message.toLowerCase();
+ if(/jadwal|meeting|rapat|produksi/.test(m))
+  return 'Aku baru mendapat pembaruan dari tim juga. Sepertinya kita perlu menyesuaikan rencana. Kamu sudah punya jadwal terbarunya?';
+ if(/kenapa|mengapa|kok/.test(m))
+  return 'Ada beberapa hal yang belum jelas dari pihak produksi. Aku sedang mencoba memastikan informasinya.';
+ if(/terima kasih|makasih|thanks/.test(m))
+  return 'Sama-sama. Kalau ada yang perlu dibicarakan soal proyek ini, kabari saja.';
+ if(/capek|lelah|pusing/.test(m))
+  return 'Hari ini cukup padat, ya. Jangan lupa istirahat sebentar kalau ada waktu.';
+ if(/halo|hai|hi|hello/.test(m))
+  return 'Halo, Biru. Kebetulan aku sedang membuka ponsel. Ada yang ingin kamu sampaikan?';
+ if(/foto|gambar|video/.test(m))
+  return 'Oh, soal dokumentasi? Aku akan coba periksa folder yang dikirim tim.';
+ if(message.includes('?'))
+  return 'Pertanyaan bagus. Aku belum punya jawaban pasti, tapi akan coba mencari tahu dulu.';
+ const replies=[
+  'Aku mengerti. Bisa ceritakan sedikit lebih jelas supaya aku tidak salah menangkap maksudmu?',
+  'Baik, aku akan mempertimbangkannya. Sepertinya ada beberapa hal yang perlu kita cek.',
+  'Oh begitu. Aku baru tahu bagian itu. Terima kasih sudah memberitahuku.',
+  'Sepertinya kita perlu membahas ini lebih lanjut saat jadwal kita memungkinkan.',
+  'Aku sedang membaca ulang pesanmu. Ada detail yang menarik di sana.'
+ ];
+ return replies[Math.floor(Math.random()*replies.length)];
+}
+
+function sendMessage(){
+ const input=document.getElementById('reply');
+ const message=input.value.trim();
+ if(!message)return;
+ addMessage(message,'me');
+ input.value='';
+ setTimeout(()=>addMessage(replyFor(message),'them'),650);
+}
+function saveNote(){
+ localStorage.setItem('biruNote',document.getElementById('myNote').value);
+ document.getElementById('saved').textContent='Catatan tersimpan di perangkat ini ✓';
+}
+function resetChat(){
+ document.getElementById('messages').innerHTML=
+ '<div class="msg them">Biru, kamu sudah melihat pesan dari tim produksi tadi?</div><div class="msg them">Mereka mengubah jadwal pertemuan. Aku baru saja diberi tahu.</div>';
+ openChat();
+}
+document.getElementById('myNote').value=localStorage.getItem('biruNote')||'';
+</script>
+</body>
+</html>
