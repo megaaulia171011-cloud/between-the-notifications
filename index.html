@@ -1,215 +1,313 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Between the Notifications</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#e9e5e8;color:#39343b;
- font-family:Arial,sans-serif;display:flex;
- justify-content:center;min-height:100vh;padding:18px 10px
-}
-.phone{
- width:100%;max-width:410px;min-height:720px;
- background:#fff;border-radius:30px;overflow:hidden;
- box-shadow:0 12px 40px #66556b30;position:relative;
- display:flex;flex-direction:column
-}
-.status{padding:15px 22px;font-size:12px;display:flex;justify-content:space-between}
-.top{padding:15px 22px 20px;background:#f5eef4}
-.small{font-size:12px;color:#928693}
-h1{font-size:25px;margin:9px 0 5px}
-.subtitle{font-size:13px;color:#887c89}
-.screen{padding:18px;flex:1;overflow:auto}
-.profile{display:flex;align-items:center;gap:13px;margin:15px 0}
-.avatar{
- width:52px;height:52px;border-radius:18px;
- background:linear-gradient(135deg,#cbb5d3,#f1d9df);
- display:grid;place-items:center;font-size:23px
-}
-.card{background:#faf7fa;border-radius:18px;padding:15px;margin:12px 0}
-.appgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
-.app{
- border:0;background:#f7f1f6;border-radius:18px;
- padding:17px 5px;color:#554958;font-size:12px
-}
-.app span{display:block;font-size:25px;margin-bottom:7px}
+body{margin:0;background:#dddce2;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:#17171b}
+button,input{font:inherit}
 button{cursor:pointer}
-.nav{display:flex;justify-content:space-around;padding:12px;border-top:1px solid #eee}
-.nav button{border:0;background:none;font-size:12px;color:#887b8a}
-.chathead{display:flex;align-items:center;gap:10px;border-bottom:1px solid #eee;padding-bottom:12px}
-.chathead .avatar{width:42px;height:42px}
-.messages{display:flex;flex-direction:column;gap:10px;padding:15px 0}
-.msg{max-width:82%;padding:11px 14px;border-radius:17px;font-size:14px;line-height:1.45}
-.them{background:#f1edf2;align-self:flex-start;border-bottom-left-radius:5px}
-.me{background:#dfcfe4;align-self:flex-end;border-bottom-right-radius:5px}
-.time{font-size:10px;color:#928693;margin-top:5px;text-align:right}
-.composer{display:flex;gap:7px;padding-top:10px;border-top:1px solid #eee}
-input{min-width:0;flex:1;border:1px solid #e7dfe8;border-radius:20px;padding:12px;font-size:14px;outline:none}
-.send{border:0;border-radius:50%;width:43px;background:#a98bb2;color:white;font-size:18px}
-.back{border:0;background:none;font-size:14px;color:#8d7198;padding:0 0 14px}
-.note{background:#fff8df;padding:17px;border-radius:15px;line-height:1.6}
-.hidden{display:none}
+.phone{width:100%;max-width:430px;height:100dvh;min-height:600px;margin:auto;background:#f7f6fa;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.status{height:45px;padding:13px 25px 5px;display:flex;justify-content:space-between;font-size:14px;font-weight:650;z-index:5}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:105px;height:28px;background:#111;border-radius:20px;z-index:6}
+.page{display:none;flex:1;min-height:0;flex-direction:column}
+.page.active{display:flex}
+.home{background:linear-gradient(155deg,#d7d6ee,#f1dce9 55%,#e4eafa);padding:25px}
+.date{text-align:center;font-size:15px;color:#615a70;margin-top:25px}
+.clock{text-align:center;font-size:75px;font-weight:250;letter-spacing:-5px;margin:0;color:#fff;text-shadow:0 2px 12px #7774}
+.widget{background:#ffffff91;border:1px solid #ffffff90;border-radius:23px;padding:16px;margin:20px 0;backdrop-filter:blur(20px)}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:23px 10px;margin-top:50px}
+.app{border:0;background:none;color:#39333f;font-size:11px}
+.app-icon{height:55px;width:55px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:27px;margin:auto auto 6px;box-shadow:0 4px 12px #55425b22}
+.dock{margin-top:auto;background:#ffffff80;border-radius:26px;padding:13px;display:flex;justify-content:space-around;backdrop-filter:blur(20px)}
+.dock button{background:none;border:0;font-size:26px}
+.header{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #dddde4;background:#faf9fc}
+.header button{border:0;background:none;color:#1685e9;font-size:16px}
+.header b{font-size:17px}
+.contact-list{overflow:auto;padding:5px 18px}
+.contact{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid #e5e4e9;background:transparent;border-top:0;border-left:0;border-right:0;width:100%;text-align:left}
+.avatar{height:49px;width:49px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#d6c5e8,#f1d7df);font-size:23px}
+.contact-info{flex:1;min-width:0}
+.contact-info b{font-size:15px}
+.contact-info p{margin:5px 0 0;font-size:12px;color:#85838b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat{background:#fff}
+.chat-head{height:67px;display:flex;align-items:center;gap:10px;padding:5px 13px;border-bottom:1px solid #eee}
+.chat-head button{background:none;border:0;color:#1685e9;font-size:15px}
+.chat-person{flex:1;text-align:center;margin-right:30px}
+.chat-person b{font-size:14px}
+.chat-person small{display:block;color:#92929a;font-size:11px;margin-top:3px}
+.chat-body{flex:1;overflow-y:auto;padding:17px 13px 12px;display:flex;flex-direction:column;gap:9px;background:#fff}
+.day{text-align:center;font-size:11px;color:#999;margin:8px}
+.bubble{max-width:82%;padding:10px 14px;border-radius:19px;font-size:15px;line-height:1.43;white-space:pre-wrap;overflow-wrap:anywhere}
+.received{align-self:flex-start;background:#e9e9ed;color:#17171b;border-bottom-left-radius:5px}
+.sent{align-self:flex-end;background:#1688ed;color:white;border-bottom-right-radius:5px}
+.bubble-time{font-size:9px;opacity:.65;text-align:right;margin-top:5px}
+.typing{align-self:flex-start;background:#e9e9ed;border-radius:16px;padding:12px 17px;color:#777;font-size:13px}
+.composer{display:flex;align-items:center;gap:8px;padding:10px 12px 18px;border-top:1px solid #eee;background:#fafafa}
+.plus{border:0;background:none;color:#1688ed;font-size:26px}
+.composer input{flex:1;min-width:0;border:1px solid #d8d8de;border-radius:23px;padding:11px 14px;outline:none;background:white;font-size:15px}
+.send{height:36px;width:36px;border:0;border-radius:50%;background:#1688ed;color:white;font-size:19px}
+.send:disabled{opacity:.4}
+.panel{padding:20px;overflow:auto}
+.panel h2{font-size:28px;margin:10px 0 20px}
+.card{background:#fff;border-radius:20px;padding:16px;margin-bottom:13px}
+textarea{width:100%;height:170px;border:0;background:#fff8dc;padding:15px;border-radius:15px;resize:vertical}
+.back{color:#1688ed;border:0;background:none;padding:8px 0}
+.small{color:#888;font-size:12px}
 </style>
 </head>
 <body>
 <div class="phone">
- <div class="status"><span>15:22 ◉</span><span>4G　▰ 87%</span></div>
+<div class="status"><span id="clockStatus">9:41</span><span>●●●  Wi-Fi  ▰</span></div>
+<div class="island"></div>
 
- <section id="home">
-  <div class="top">
-   <div class="small">SATURDAY · 01 NOVEMBER</div>
-   <h1>Good afternoon, Biru.</h1>
-   <div class="subtitle">A little world behind the screen ♡</div>
-  </div>
-  <div class="screen">
-   <div class="card">
-    <div class="small">RECENT NOTIFICATION</div>
-    <div class="profile">
-     <div class="avatar">🪻</div>
-     <div><b>Seo-jun</b><div class="small">Ada pesan baru untukmu.</div></div>
-    </div>
-    <button class="back" onclick="openChat()">Buka percakapan →</button>
-   </div>
-   <p class="small">YOUR APPLICATIONS</p>
-   <div class="appgrid">
-    <button class="app" onclick="openChat()"><span>💬</span>Messages</button>
-    <button class="app" onclick="showPage('instagram')"><span>📷</span>Instagram</button>
-    <button class="app" onclick="showPage('gallery')"><span>🖼️</span>Gallery</button>
-    <button class="app" onclick="showPage('notes')"><span>📝</span>Notes</button>
-    <button class="app" onclick="showPage('calls')"><span>📞</span>Calls</button>
-    <button class="app" onclick="showPage('settings')"><span>⚙️</span>Settings</button>
-   </div>
-  </div>
- </section>
+<section class="page active" id="home">
+<div class="home">
+<div class="date" id="date">SUNDAY, NOVEMBER 1</div>
+<div class="clock" id="bigClock">15:41</div>
+<div class="widget">
+<div style="font-size:12px;color:#625a70">YOUR NOTIFICATIONS</div>
+<p style="margin-bottom:4px">💬 <b>Seo-jun</b></p>
+<div style="font-size:13px">Biru, are you there? I need to tell you something.</div>
+</div>
+<div class="apps">
+<button class="app" onclick="openMessages()"><div class="app-icon">💬</div>Messages</button>
+<button class="app" onclick="show('instagram')"><div class="app-icon">📷</div>Instagram</button>
+<button class="app" onclick="show('photos')"><div class="app-icon">🌄</div>Photos</button>
+<button class="app" onclick="show('notes')"><div class="app-icon">📝</div>Notes</button>
+<button class="app" onclick="show('phonepage')"><div class="app-icon">📞</div>Phone</button>
+<button class="app" onclick="show('settings')"><div class="app-icon">⚙️</div>Settings</button>
+</div>
+<div class="dock">
+<button onclick="openMessages()">💬</button>
+<button onclick="show('phonepage')">📞</button>
+<button onclick="show('photos')">🖼️</button>
+<button onclick="show('instagram')">📷</button>
+</div>
+</div>
+</section>
 
- <section id="chat" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Back to home</button>
-  <div class="chathead">
-   <div class="avatar">🌙</div>
-   <div><b>Han Seo-jun</b><div class="small">online · project team</div></div>
-  </div>
-  <div id="messages" class="messages">
-   <div class="msg them">Biru, kamu sudah melihat pesan dari tim produksi tadi?</div>
-   <div class="msg them">Mereka mengubah jadwal pertemuan. Aku baru saja diberi tahu.</div>
-  </div>
-  <div class="composer">
-   <input id="reply" placeholder="Tulis pesan Biru..." onkeydown="if(event.key==='Enter')sendMessage()">
-   <button class="send" onclick="sendMessage()">➤</button>
-  </div>
- </section>
+<section class="page" id="messages">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Messages</b><button onclick="newGroup()">＋</button></div>
+<div class="contact-list" id="contactList"></div>
+</section>
 
- <section id="instagram" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Home</button>
-  <h2>Instagram</h2>
-  <div class="card">📷 <b>lum.official</b><p>Behind the scenes. A little glimpse of today's work.</p><div class="small">♡ 24.8K likes · 328 comments</div></div>
-  <div class="card">🌙 <b>seojun.archive</b><p>Long day, good people, better memories.</p><div class="small">♡ 18.2K likes · 194 comments</div></div>
-  <p class="small">Fictional social feed</p>
- </section>
+<section class="page chat" id="chat">
+<div class="chat-head">
+<button onclick="openMessages()">‹ Chats</button>
+<div class="chat-person"><b id="chatName">Seo-jun</b><small id="chatStatus">iMessage</small></div>
+<button onclick="chatInfo()">ⓘ</button>
+</div>
+<div class="chat-body" id="chatBody">
+<div class="day">iMessage · Today</div>
+</div>
+<div class="composer">
+<button class="plus" onclick="mediaMenu()">＋</button>
+<input id="messageInput" placeholder="iMessage" autocomplete="off">
+<button class="send" id="sendBtn" onclick="send()">↑</button>
+</div>
+</section>
 
- <section id="gallery" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Home</button>
-  <h2>Gallery</h2>
-  <div class="card">🌆 <b>Studio, 18:42</b><p class="small">A quiet evening after rehearsal.</p></div>
-  <div class="card">☕ <b>Untitled_02</b><p class="small">Coffee and unfinished schedules.</p></div>
-  <div class="card">🎞️ <b>Behind the scenes</b><p class="small">Memories from the project.</p></div>
- </section>
+<section class="page" id="instagram">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Instagram</b><span>♡</span></div>
+<div class="panel"><h2>Instagram</h2>
+<div class="card">🌸 <b>yuna.archive</b><p>today's little moments ✨</p><span class="small">♡ 2,481 likes · 81 comments</span></div>
+<div class="card">🌙 <b>seo.jun</b><p>Long day. Need some rest.</p><span class="small">♡ 8,912 likes · 203 comments</span></div>
+<div class="card">🦋 <b>studio.official</b><p>New project announcement coming soon.</p></div>
+</div>
+</section>
 
- <section id="notes" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Home</button>
-  <h2>Notes</h2>
-  <textarea id="myNote" placeholder="Tulis catatan Biru di sini..." style="width:100%;height:190px;border:0;background:#fff8df;border-radius:15px;padding:15px;font:14px Arial"></textarea>
-  <button class="app" onclick="saveNote()">💾 Save note</button>
-  <p id="saved" class="small"></p>
- </section>
+<section class="page" id="photos">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Photos</b></div>
+<div class="panel"><h2>Library</h2><div class="card">🌆 <b>Recent memories</b><p class="small">Your fictional photo collection.</p></div><div class="card">🎞️ Behind the scenes</div><div class="card">☁️ Favorites</div></div>
+</section>
 
- <section id="calls" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Home</button>
-  <h2>Recent calls</h2>
-  <div class="card">🌙 Han Seo-jun <span class="small"> · Yesterday, 21:14</span></div>
-  <div class="card">🌷 Yuna <span class="small"> · Yesterday, 17:30</span></div>
- </section>
+<section class="page" id="notes">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Notes</b></div>
+<div class="panel"><h2>Notes</h2><textarea id="note" placeholder="Write something..."></textarea><button class="back" onclick="saveNote()">Save note</button><span id="noteStatus" class="small"></span></div>
+</section>
 
- <section id="settings" class="screen hidden">
-  <button class="back" onclick="showPage('home')">← Home</button>
-  <h2>Settings</h2>
-  <div class="card">BETWEEN THE NOTIFICATIONS<br><span class="small">Interactive fictional story · Version 1.0</span></div>
-  <button class="app" onclick="resetChat()">↻ Reset conversation</button>
- </section>
+<section class="page" id="phonepage">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Phone</b></div>
+<div class="panel"><h2>Recents</h2><div class="card">🌙 Han Seo-jun <span class="small">Incoming call · Yesterday</span></div><div class="card">🌷 Yuna <span class="small">Missed call · Monday</span></div></div>
+</section>
 
- <div class="nav">
-  <button onclick="showPage('home')">⌂<br>Home</button>
-  <button onclick="openChat()">▢<br>Messages</button>
-  <button onclick="showPage('gallery')">▧<br>Gallery</button>
-  <button onclick="showPage('notes')">☷<br>Notes</button>
- </div>
+<section class="page" id="settings">
+<div class="header"><button onclick="show('home')">‹ Home</button><b>Settings</b></div>
+<div class="panel"><h2>Settings</h2><div class="card">BETWEEN THE NOTIFICATIONS<br><span class="small">Version 2.0 · iOS Edition</span></div><div class="card">Chat history is saved on this device.</div><button class="back" onclick="clearAll()">Reset conversations</button></div>
+</section>
 </div>
 
 <script>
-const pages=['home','chat','instagram','gallery','notes','calls','settings'];
+const characters=[
+{id:'seo',name:'Han Seo-jun',icon:'🌙',status:'online',first:'Biru, are you there? I need to tell you something.'},
+{id:'yuna',name:'Yuna',icon:'🌷',status:'active recently',first:'BIRUUU. Where have you been?'},
+{id:'min',name:'Min-jae',icon:'🖤',status:'offline',first:'Did you receive the updated schedule?'},
+{id:'group',name:'Project Group',icon:'👥',status:'4 members',first:'Welcome to the group!'}
+];
+let current='seo';
+let histories=JSON.parse(localStorage.getItem('btMessages')||'{}');
+let memory=JSON.parse(localStorage.getItem('btMemory')||'{}');
 
-function showPage(page){
- pages.forEach(id=>document.getElementById(id).classList.add('hidden'));
- document.getElementById(page).classList.remove('hidden');
+function save(){
+localStorage.setItem('btMessages',JSON.stringify(histories));
+localStorage.setItem('btMemory',JSON.stringify(memory));
 }
-function openChat(){showPage('chat')}
+function show(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+function openMessages(){renderContacts();show('messages')}
+function renderContacts(){
+const box=document.getElementById('contactList');
+box.innerHTML='';
+characters.forEach(c=>{
+let msgs=histories[c.id]||[];
+let last=msgs.length?msgs[msgs.length-1].text:c.first;
+let b=document.createElement('button');
+b.className='contact';
+b.innerHTML=`<div class="avatar">${c.icon}</div><div class="contact-info"><b>${c.name}</b><p></p></div>`;
+b.querySelector('p').textContent=last;
+b.onclick=()=>openChat(c.id);
+box.appendChild(b);
+});
+}
+function openChat(id){
+current=id;
+let c=characters.find(x=>x.id===id);
+document.getElementById('chatName').textContent=c.name;
+document.getElementById('chatStatus').textContent=c.status;
+show('chat');renderChat();
+}
+function renderChat(){
+let box=document.getElementById('chatBody');box.innerHTML='<div class="day">iMessage · Today</div>';
+let msgs=histories[current]||[];
+if(!msgs.length){
+let c=characters.find(x=>x.id===current);
+addBubble(c.first,'received',false);
+}
+msgs.forEach(m=>addBubble(m.text,m.who==='me'?'sent':'received',false));
+box.scrollTop=box.scrollHeight;
+}
+function addBubble(text,type,saveIt=true){
+let box=document.getElementById('chatBody');
+let b=document.createElement('div');b.className='bubble '+type;
+b.textContent=text;
+box.appendChild(b);
+if(saveIt){box.scrollTop=box.scrollHeight;}
+}
+function send(){
+let input=document.getElementById('messageInput');
+let text=input.value.trim();if(!text)return;
+if(!histories[current])histories[current]=[];
+histories[current].push({who:'me',text});
+addBubble(text,'sent');input.value='';save();
+let typing=document.createElement('div');typing.className='typing';typing.textContent='Typing…';
+document.getElementById('chatBody').appendChild(typing);
+setTimeout(()=>{
+typing.remove();
+let answer=respond(text,current);
+histories[current].push({who:'them',text:answer});
+addBubble(answer,'received');save();
+},900+Math.random()*1200);
+}
+document.getElementById('messageInput').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
 
-function addMessage(text,type){
- const area=document.getElementById('messages');
- const bubble=document.createElement('div');
- bubble.className='msg '+type;
- bubble.textContent=text;
- area.appendChild(bubble);
- area.scrollTop=area.scrollHeight;
-}
+function respond(text,id){
+let m=text.toLowerCase();
+let mem=memory[id]||{topics:[],count:0};
+mem.count++;
+let topic='';
+if(/capek|lelah|istirahat/.test(m))topic='tired';
+else if(/marah|kesal|sebel/.test(m))topic='upset';
+else if(/jadwal|rapat|meeting|proyek/.test(m))topic='project';
+else if(/foto|video|gambar/.test(m))topic='media';
+else if(/siapa|orang|karakter/.test(m))topic='people';
+else if(/kenapa|mengapa|kok/.test(m))topic='question';
+else if(/halo|hai|hello/.test(m))topic='greeting';
+else if(/terima kasih|makasih/.test(m))topic='thanks';
+else topic='general';
 
-function replyFor(message){
- const m=message.toLowerCase();
- if(/jadwal|meeting|rapat|produksi/.test(m))
-  return 'Aku baru mendapat pembaruan dari tim juga. Sepertinya kita perlu menyesuaikan rencana. Kamu sudah punya jadwal terbarunya?';
- if(/kenapa|mengapa|kok/.test(m))
-  return 'Ada beberapa hal yang belum jelas dari pihak produksi. Aku sedang mencoba memastikan informasinya.';
- if(/terima kasih|makasih|thanks/.test(m))
-  return 'Sama-sama. Kalau ada yang perlu dibicarakan soal proyek ini, kabari saja.';
- if(/capek|lelah|pusing/.test(m))
-  return 'Hari ini cukup padat, ya. Jangan lupa istirahat sebentar kalau ada waktu.';
- if(/halo|hai|hi|hello/.test(m))
-  return 'Halo, Biru. Kebetulan aku sedang membuka ponsel. Ada yang ingin kamu sampaikan?';
- if(/foto|gambar|video/.test(m))
-  return 'Oh, soal dokumentasi? Aku akan coba periksa folder yang dikirim tim.';
- if(message.includes('?'))
-  return 'Pertanyaan bagus. Aku belum punya jawaban pasti, tapi akan coba mencari tahu dulu.';
- const replies=[
-  'Aku mengerti. Bisa ceritakan sedikit lebih jelas supaya aku tidak salah menangkap maksudmu?',
-  'Baik, aku akan mempertimbangkannya. Sepertinya ada beberapa hal yang perlu kita cek.',
-  'Oh begitu. Aku baru tahu bagian itu. Terima kasih sudah memberitahuku.',
-  'Sepertinya kita perlu membahas ini lebih lanjut saat jadwal kita memungkinkan.',
-  'Aku sedang membaca ulang pesanmu. Ada detail yang menarik di sana.'
- ];
- return replies[Math.floor(Math.random()*replies.length)];
+let name=characters.find(c=>c.id===id).name.split(' ')[0];
+let replies={
+seo:{
+tired:['Hari ini memang padat. Kita bisa lanjut bicara nanti kalau kamu sudah lebih santai.','Aku paham. Jangan paksakan diri menyelesaikan semuanya sekaligus.'],
+upset:['Aku menangkap kalau kamu sedang kesal. Apa ada sesuatu yang terjadi sebelumnya?','Oke, aku dengarkan. Ceritakan bagian yang paling mengganggumu.'],
+project:['Aku juga sedang memeriksa detail proyek itu. Ada perubahan yang belum disampaikan ke semua orang.','Soal proyek, aku punya beberapa catatan. Kita perlu memastikan jadwalnya dulu.'],
+media:['Aku belum melihat file itu. Bisa kirimkan lagi supaya aku bisa memeriksanya?','Oh, dokumentasi. Aku akan cek folder yang dibagikan tim.'],
+people:['Maksudmu siapa? Aku ingin memastikan kita membicarakan orang yang sama.','Ada beberapa orang di tim. Sebutkan sedikit konteksnya?'],
+question:['Belum tentu seperti yang kita kira. Aku sedang mencoba memahami situasinya juga.','Aku belum punya jawaban pasti. Apa yang membuatmu penasaran?'],
+greeting:['Hei, Biru. Aku sedang online. Ada kabar?','Halo. Kebetulan aku baru saja selesai memeriksa pesan.'],
+thanks:['Tidak masalah. Kita satu tim, ingat?','Sama-sama. Senang kalau itu membantu.'],
+general:['Aku membaca pesanmu. Bisa jelaskan sedikit lebih lanjut?','Oh, begitu. Aku ingin tahu lebih banyak tentang bagian itu.','Tunggu, aku mau memastikan aku tidak salah paham.']
+},
+yuna:{
+tired:['Biru, istirahat dulu! Nanti kita lanjut cerita.','Aduh, hari ini berat ya? Jangan lupa makan juga.'],
+upset:['Siapa yang bikin kamu kesal? Aku mau dengar ceritanya.','Eh, cerita ke aku. Jangan dipendam sendirian.'],
+project:['Aku baru baca grup! Kenapa jadwalnya berubah lagi?','Tim produksi benar-benar sibuk hari ini.'],
+media:['KIRIM FOTO DONG! Aku penasaran!','Aku suka dokumentasi! Ada yang lucu?'],
+people:['Siapa? Ceritakan, aku mungkin tahu.','Tunggu, aku kenal orang itu nggak?'],
+question:['Pertanyaan bagus. Tapi aku juga masih mencari tahu.','Hmmm, aku punya beberapa dugaan.'],
+greeting:['BIRUUUU! Akhirnya muncul juga!','HALOOO! Aku sedang bosan sekali.'],
+thanks:['Ih, nggak usah formal begitu!','Sama-samaaa!'],
+general:['HAH? Tunggu, aku ingin tahu lebih banyak.','Wah, terus? Ceritakan lagi!','Oke, aku sedang menyimak.']
+},
+min:{
+tired:['Sebaiknya selesaikan yang paling penting saja hari ini.','Istirahat juga bagian dari pekerjaan.'],
+upset:['Aku mengerti. Jelaskan situasinya secara berurutan.','Apa yang sebenarnya terjadi?'],
+project:['Aku sudah memperbarui catatan jadwal. Periksa dokumen terakhir.','Ada perubahan pada pembagian tugas.'],
+media:['File terakhir sudah masuk ke folder bersama.','Periksa versi terbaru sebelum digunakan.'],
+people:['Orang yang kamu maksud terlibat dalam jadwal kemarin?','Aku perlu nama atau konteks yang lebih jelas.'],
+question:['Aku belum bisa memastikan.','Kita perlu memeriksa faktanya dahulu.'],
+greeting:['Halo. Ada yang perlu dibahas?','Aku sedang online.'],
+thanks:['Baik.','Tidak masalah.'],
+general:['Bisa berikan detail lebih lanjut?','Aku akan mempertimbangkannya.','Baik, aku mengerti maksudmu.']
+},
+group:{
+tired:['Yuna: Jangan lupa istirahat semuanya!','Min-jae: Kita lanjutkan besok sesuai jadwal.'],
+upset:['Yuna: Ada masalah apa?','Seo-jun: Kita bicarakan satu per satu.'],
+project:['Min-jae: Aku akan kirim jadwal terbaru.','Seo-jun: Semua anggota harap cek pembaruan.'],
+media:['Yuna: Aku mau lihat hasilnya!','Seo-jun: Kirimkan ke folder bersama.'],
+people:['Min-jae: Siapa yang dimaksud?','Yuna: Aku mungkin tahu orangnya.'],
+question:['Seo-jun: Kita perlu mencari tahu dahulu.','Min-jae: Belum ada konfirmasi resmi.'],
+greeting:['Yuna: HALOO SEMUANYA!','Seo-jun: Selamat sore.'],
+thanks:['Yuna: Sama-sama!','Seo-jun: Tidak masalah.'],
+general:['Yuna: Tunggu, aku ingin tahu lanjutannya!','Seo-jun: Bisa jelaskan lebih detail?','Min-jae: Aku akan memeriksa informasinya.']
 }
-
-function sendMessage(){
- const input=document.getElementById('reply');
- const message=input.value.trim();
- if(!message)return;
- addMessage(message,'me');
- input.value='';
- setTimeout(()=>addMessage(replyFor(message),'them'),650);
+};
+let choices=replies[id][topic]||replies[id].general;
+mem.topics.push(topic);mem.topics=mem.topics.slice(-12);
+memory[id]=mem;save();
+return choices[Math.floor(Math.random()*choices.length)];
 }
+function chatInfo(){
+let c=characters.find(x=>x.id===current);
+alert(c.name+'\\n'+c.status+'\\n'+(histories[current]||[]).length+' saved messages');
+}
+function mediaMenu(){alert('Media simulator: photo and voice-note features will be added in a later update.')}
+function newGroup(){alert('Project Group is already available in your Messages list.')}
 function saveNote(){
- localStorage.setItem('biruNote',document.getElementById('myNote').value);
- document.getElementById('saved').textContent='Catatan tersimpan di perangkat ini ✓';
+localStorage.setItem('btNote',document.getElementById('note').value);
+document.getElementById('noteStatus').textContent='Saved ✓';
 }
-function resetChat(){
- document.getElementById('messages').innerHTML=
- '<div class="msg them">Biru, kamu sudah melihat pesan dari tim produksi tadi?</div><div class="msg them">Mereka mengubah jadwal pertemuan. Aku baru saja diberi tahu.</div>';
- openChat();
+document.getElementById('note').value=localStorage.getItem('btNote')||'';
+function clearAll(){
+if(confirm('Hapus seluruh riwayat chat di perangkat ini?')){
+histories={};memory={};save();openMessages();
 }
-document.getElementById('myNote').value=localStorage.getItem('biruNote')||'';
+}
+function updateTime(){
+let d=new Date();
+let t=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',hour12:false});
+document.getElementById('clockStatus').textContent=t;
+document.getElementById('bigClock').textContent=t;
+document.getElementById('date').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}).toUpperCase();
+}
+updateTime();setInterval(updateTime,30000);
 </script>
 </body>
 </html>
